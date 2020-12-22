@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "VerifyAccount";
+}
+
+<h2>Активація аккаунту</h2>
+
+@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+{
+    <div class="alert alert-success">
+        Ваш аккаунт успішно активований. Клікніть, щоб @Html.ActionLink("Увійти", "Login", "User")
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Помилка!</strong> @ViewBag.Message
+    </div>
+}

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Календар-планувальник</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Календар-планувальник", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="nav-item">
+                        @if (!Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Реєстрація", "Registration", "User")
+                        }
+                    </li>
+                    <li class="nav-item">
+                        @if (!Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Увійти", "Login", "User")
+                        }
+                    </li>
+                    <li class="nav-item">
+                        @if (Request.IsAuthenticated)
+                        {
+                            <p class="navbar-text">
+                                Вітаю, @HttpContext.Current.User.Identity.Name
+                            </p>
+                        }
+                    </li>
+                    <li class="nav-item">
+                        @if (Request.IsAuthenticated)
+                        {
+                        <p class="navbar-text">
+                            @Html.ActionLink("Працівники", "Index", "Report", new { id = 1 }, new { @style = "color:#ffffff;" })
+                        </p>
+                        }
+                    </li>
+                    <li class="nav-item">
+                        @if (Request.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                            {
+                                <p class="navbar-text">
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" style="color: white">Вихід</a>
+                                </p>
+                            }
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content" style="padding-top: 40px;">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Календар-планувальник</p>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

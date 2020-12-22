@@ -1,0 +1,87 @@
+﻿@model WebSheduler.Models.Workers
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (!Convert.ToBoolean(ViewBag.Status))
+{
+    <div class="alert alert-succes">
+        @ViewBag.Message
+    </div>
+    <h3>Працівники</h3>
+    <table class="table">
+        @{int i = 0;
+        }
+        @foreach (var user in Model.Users)
+        {
+            <tr style="background:#faebfa">
+                <th>
+                    @Html.DisplayNameFor(model => user.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => user.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => user.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => user.StatusID)
+                </th>
+            </tr>
+            <tr style="background:#faebfa">
+                <td>
+                    @Html.DisplayFor(model => user.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => user.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => user.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => user.StatusID)
+                </td>
+            </tr>
+            <tr style="background:#defae1">
+                <th>
+                    @Html.DisplayName("Назва")
+                </th>
+                <th>
+                    @Html.DisplayName("Початок")
+                </th>
+                <th>
+                    @Html.DisplayName("Кінець")
+                </th>
+                <th>
+                    @Html.DisplayName("Опис")
+                </th>
+            </tr>
+            foreach (var events in Model.Events[i])
+            {
+
+                <tr style="background:#defae1">
+                    <td>
+                        @Html.DisplayFor(modelItem => events.Subject)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => events.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => events.End)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => events.Description)
+                    </td>
+                </tr>
+            }
+            i++;
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-danger">
+        @ViewBag.Message
+    </div>
+}
